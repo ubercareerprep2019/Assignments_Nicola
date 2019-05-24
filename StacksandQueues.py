@@ -48,7 +48,23 @@ print("Stack Size: ", myStack.size())
 class Queue:
     def __init__(self):
         self.queue = Stack()
+        self.revqueue = Stack()
+        self.first = None
+
     def enqueue(self, value):
         self.queue.push(value)
+
     def dequeue(self):
-        return self.queue
+        queuecopy = self.queue
+        for i in queuecopy:
+            self.revqueue.push(self.queuecopy.pop())
+        return self.revqueue.pop()
+
+
+myQueue = Queue()
+myQueue.enqueue(15)
+myQueue.enqueue(47)
+myQueue.enqueue(-12)
+print("Dequeue: ", myQueue.dequeue)
+print("Dequeue: ", myQueue.dequeue)
+
