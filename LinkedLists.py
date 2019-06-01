@@ -72,4 +72,25 @@ class LinkedList:
             node = node.next
             i += 1
         return i
+    
+def testPushBackAddsOneNode():
+    return
+def testPopBackRemovesCorrectNode():
+    return
+def testEraseRemovesCorrectNode():
+    return
+def testEraseDoesNothingIfNoNode():
+    return
+def testElementAtReturnNode():
+    return
+def testElementAtReturnNoNodeIfIndexDoesNotExist():
+    return
+def testSizeReturnsCorrectSize():
+    return
+
+
+def hasCycle():
+    return
+def isPalindrome():
+    return
 
