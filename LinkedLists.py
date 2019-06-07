@@ -134,10 +134,31 @@ def testSizeReturnsCorrectSize(linkedlist):
 
 
 def hasCycle(linkedlist):
-    return
+    slow = linkedlist.dummyhead.next
+    fast = linkedlist.dummyhead.next
+    while fast.next is not linkedlist.dummytail and fast.next is not linkedlist.dummytail:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+        else: return False
 
-def isPalindrome():
-    return
+def isPalindrome(linkedlist):
+    reverse = LinkedList()
+    i = linkedlist.size() - 1
+    while i != 0 :
+        value = linkedlist.elementAt(i)
+        reverse.pushBack(value)
+    a = linkedlist.dummyhead.next
+    b = reverse.dummyhead.next
+    while a is not linkedlist.dummytail and b is not reverse.dummytail:
+        if a == b:
+            a = a.next
+            b = b.next
+        else:
+            return False
+    return True
+
 
 
 linkedlist = LinkedList()
