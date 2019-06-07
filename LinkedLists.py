@@ -5,17 +5,30 @@ class Node:
 
 class LinkedList:
     def __init__(self):
-        self.dummyhead = None
+        self.dummyhead = Node()
+        self.dummytail = Node()
+        self.pre = Node()
+        self.dummyhead.value = None
         self.dummytail = None
         self.pre = Node()
         self.pre.value = None
         self.pre.next = self.dummytail
+        self.dummyhead.next = self.pre
+
+    def __str__(self):
+        node = self.dummyhead.next
+        string = ""
+        while node.next != self.dummytail:
+            string = string + str(node.value) + " "
+            node = node.next
+        string = string + str(node.value)
+        return string
 
     def pushBack(self, value):
         current = Node()
         current.value = value
         current.next = self.dummytail
-        if self.pre is None:
+        if self.pre.value is None:
             self.pre = current
             self.dummyhead.next = self.pre
         else:
@@ -25,10 +38,10 @@ class LinkedList:
     def popBack(self):
         node = self.dummyhead.next
         value = self.pre.value
-        while node != self.pre:
+        while node.next != self.pre:
             node = node.next
         node.next = self.dummytail
-        self.pre = node
+        self.pre.value = node.value
         return value
 
     def insert(self, index, value):
@@ -51,46 +64,94 @@ class LinkedList:
         node = self.dummyhead.next
         previous = None
         i = 0
-        while i != index and node is not self.dummytail:
-            previous = node
-            node = node.next
-            i += 1
-        previous.next = node.next
+        if self.pre.value is not None:
+            while i != index and node is not self.dummytail:
+                previous = node
+                node = node.next
+                i += 1
+            previous.next = node.next
+        else:
+            return
 
     def elementAt(self, index):
-        node = self.dummyhead.ext
+        node = self.dummyhead.next
         i = 0
-        while i != index and node is not self.dummytail:
-            node = node.next
-            i += 1
-        return node.value
-    
+        if self.pre.value is not None:
+            while i != index and node is not self.dummytail:
+                node = node.next
+                i += 1
+            return node.value
+        else:
+            return
+
     def size(self):
         node = self.dummyhead.next
         i = 0
-        while node is not None:
-            node = node.next
-            i += 1
-        return i
-    
-def testPushBackAddsOneNode():
-    return
-def testPopBackRemovesCorrectNode():
-    return
-def testEraseRemovesCorrectNode():
-    return
-def testEraseDoesNothingIfNoNode():
-    return
-def testElementAtReturnNode():
-    return
-def testElementAtReturnNoNodeIfIndexDoesNotExist():
-    return
-def testSizeReturnsCorrectSize():
-    return
+        if self.pre.value is not None:
+            while node is not self.dummytail:
+                node = node.next
+                i += 1
+            return i
+        else:
+            return 0
+
+def testPushBackAddsOneNode(linkedlist):
+    a = linkedlist.size()
+    print("Before push: ", a)
+    print("Pushed 8 ")
+    linkedlist.pushBack(8)
+    b = linkedlist.size()
+    print("After push: ", b)
+
+def testPopBackRemovesCorrectNode(linkedlist):
+    print("Size before pop: ",linkedlist.size())
+    print("Popped: ", linkedlist.popBack())
+    print("Size after pop: ", linkedlist.size())
+
+def testEraseRemovesCorrectNode(linkedlist):
+    print(linkedlist)
+    linkedlist.erase(2)
+    print("Removing 3rd element")
+    print(linkedlist)
+
+def testEraseDoesNothingIfNoNode(linkedlist):
+    linkedlist.erase(2)
+    print("Removing 3rd element from an empty list")
+    print(linkedlist)
+
+def testElementAtReturnNode(linkedlist):
+    print(linkedlist)
+    print("Element at index 3: ", linkedlist.elementAt(3))
+
+def testElementAtReturnNoNodeIfIndexDoesNotExist(linkedlist):
+    print(linkedlist)
+    print("Element at index 3 in an empty list: ", linkedlist.elementAt(3))
+
+def testSizeReturnsCorrectSize(linkedlist):
+    print(linkedlist)
+    print("Size of: ", linkedlist.size())
 
 
-def hasCycle():
+
+def hasCycle(linkedlist):
     return
+
 def isPalindrome():
     return
 
+
+linkedlist = LinkedList()
+linkedlist.pushBack(3)
+linkedlist.pushBack(6)
+linkedlist.pushBack(9)
+linkedlist.pushBack(12)
+linkedlist.pushBack(15)
+testPushBackAddsOneNode(linkedlist)
+testPopBackRemovesCorrectNode(linkedlist)
+testEraseRemovesCorrectNode(linkedlist)
+emptylinkedlist = LinkedList()
+testEraseDoesNothingIfNoNode(emptylinkedlist)
+testElementAtReturnNode(linkedlist)
+testElementAtReturnNoNodeIfIndexDoesNotExist(emptylinkedlist)
+testSizeReturnsCorrectSize(linkedlist)
+testSizeReturnsCorrectSize(emptylinkedlist)
