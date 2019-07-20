@@ -10,7 +10,6 @@ class TreeNode:
             self.right = right
         self.data = data
 
-
     # Trees - Ex1
     def PrintTree(self):
         print(self.data)
@@ -29,29 +28,28 @@ root.PrintTree()
 
 
 #Trees - Ex2
-class OrganizationStructure:
+
+class Employee:
     def __init__(self, name, title):
         self.name = name
         self.title = title
+        self.directReports = []
 
     def __str__(self):
-        string = "Name: " + self.name + " Title: " + self.title
+        string = "Name: " + self.name + ", Title: " + self.title
         return string
 
 
+class OrganizationStructure:
+    def __init__(self, name, title):
+        self.ceo = Employee(name, title)
+        self.employees = self.ceo.directReports
 
-root2 = TreeNode(OrganizationStructure("A", "CEO"))
-root2.left = TreeNode(OrganizationStructure("B", "CFO"))
-root2.right = TreeNode(OrganizationStructure("C", "CTO"))
-root2.left.left = TreeNode(OrganizationStructure("I", "Director"))
-root2.left.left.left = TreeNode(OrganizationStructure("J", "Sales Represenatative"))
-root2.left.left.left.left = TreeNode(OrganizationStructure("K", "Sales Intern"))
-root2.right.left = TreeNode(OrganizationStructure("D", "Manager"))
-root2.right.right = TreeNode(OrganizationStructure("E", "Manager"))
-root2.right.left.left = TreeNode(OrganizationStructure("F", "Engineer"))
-root2.right.left.right = TreeNode(OrganizationStructure("G", "Engineer"))
-
-
-
-root2.PrintTree()
-
+    def PrintByLevel(self):
+        queue = []
+        queue.append(self.ceo)
+        while len(queue) > 0:
+            print(queue[0])
+            boss = queue.pop(0)
+            if boss.directReports is not None:
+                queue.append(boss.directReports)
