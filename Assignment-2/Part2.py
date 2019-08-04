@@ -1,30 +1,63 @@
+#Trees - Ex4
 class Node:
-    def __init__(self,data):
+    def __init__(self, data=None):
         self.left = None
         self.right = None
         self.data = data
 
 
-def find(node, key):
-    if node is None or node.data == key:
-        return node
-    if node.data < key:
-        return find(node.right, key)
-    if node.data > key:
-        return find(node.left, key)
+class BinarySearchTree:
+    def __init__(self):
+        self.root = Node
+
+    def find(self, node, key):
+        if node is None:
+            return False
+        elif node.data == key:
+            return True
+        elif node.data < key:
+            return BinarySearchTree.find(node.right, key)
+        elif node.data > key:
+            return BinarySearchTree.find(node.left, key)
 
 
-def insert(node, keyNode):
-    if node is None:
-        node = keyNode
-    else:
-        if node.data < keyNode.data:
-            if node.right is None:
-                node.right = keyNode
-            else:
-                insert(node.right, keyNode)
+    def insert(self, node, key):
+        if node is None:
+            node = key
         else:
-            if node.left is None:
-                node.left = keyNode
+            if node.data < key.data:
+                if node.right is None:
+                    node.right = key
+                else:
+                    BinarySearchTree.insert(node.right, key)
             else:
-                insert(node.left, keyNode)
+                if node.left is None:
+                    node.left = key
+                else:
+                    BinarySearchTree.insert(node.left, key)
+
+
+
+#Trees - Ex5
+
+class ListPhoneBook:
+    def __init__(self):
+        self.members = []
+        self.numbers = []
+
+    def size(self):
+        return len(self.members)
+
+    def insert(self, name, phoneNumber):
+        self.members.append(name)
+        self.numbers.append(phoneNumber)
+
+    def find(self, name):
+        numIndex = self.members.index(name)
+        return self.numbers[numIndex]
+
+class BinarySearchTreePhoneBook:
+    def __init__(self):
+        self.phoneBook = BinarySearchTree
+
+   
