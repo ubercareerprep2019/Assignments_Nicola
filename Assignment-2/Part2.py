@@ -60,4 +60,24 @@ class BinarySearchTreePhoneBook:
     def __init__(self):
         self.phoneBook = BinarySearchTree
 
+    def size(self):
+        return
+
+    def insert(self, name, phoneNumber):
+        self.phoneBook.insert(self.phoneBook.root.data, [name, phoneNumber])
+
+    def find(self, name):
+        self.phoneBook.find(self.phoneBook.root.data, name)
+
+
+#Trees - Ex6
+
+data = open("data.csv", "r")
+PhoneBookList = ListPhoneBook
+
+for line in data:
+    PhoneBookList.insert(line)
+    
+
+
    
