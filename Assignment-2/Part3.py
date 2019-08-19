@@ -8,6 +8,8 @@ class GraphWithAdjacencyList:
     def __init__(self):
         self.adjNodes = {}
         self.Nodes = {}
+        self.dfsOutput = []
+        self.bfsOutput = []
 
     def addNode(self, key):
         graphKey = GraphNode(key)
@@ -36,24 +38,21 @@ class GraphWithAdjacencyList:
             self.adjNodes[graphNode1].remove(graphNode2)
             self.adjNodes[graphNode2].remove(graphNode1)
 
-
     def getAdjNodes(self, key):
         graphKey = self.Nodes[key]
         return self.adjNodes[graphKey]
-    
-    
+
     #Graphs - Ex2
 
     def DFS(self, key):
-        if key not in self.Nodes:
+        if key not in self.dfsOutput:
             self.dfsOutput.append(key)
             for x in self.Nodes[key]:
                 GraphWithAdjacencyList.DFS(x)
         return self.dfsOutput
 
     #Graphs - Ex3
-    
-    
+
     def BFS(self, key):
         queue = [key]
         self.bfsOutput = [key]
@@ -64,10 +63,5 @@ class GraphWithAdjacencyList:
             for n in self.adjNodes[node]:
                 if n not in self.bfsOutput:
                     queue.append(n)
-                    self.bfsOutput.append(n)
         return self.bfsOutput
-
-
-
-
 
